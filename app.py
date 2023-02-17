@@ -39,6 +39,7 @@ def submit_job():
     :return: JSON response
     """
     data = request.get_json()
+    # TODO: request validation to make sure required fields are present, datatype is valid etc.
     response = job_handler_service.submit_job(data)
     return jsonify(response), 200
 
@@ -58,6 +59,8 @@ def get_job_status():
             return jsonify(response), 200
         else:
             return jsonify("Requested job not found"), 404
+    # TODO: raise valid exception from within job_handler service, and catch specific exceptions
+    #  instead of generic ones.
     except Exception as e:
         _logger.error(f"Could not fetch the data:{e}")
 
